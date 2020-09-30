@@ -1,0 +1,17 @@
+        <form >
+            <div class="form-name">
+                <label for="name">Name*</label>
+                <input matInput required>
+                <mat-error *ngIf="name.invalid">{{getErrorMessageName()}}</mat-error>
+            </div>
+            <div class="form-amount">
+                <label for="amount">Amount*</label>
+                <input matInput  required>
+                <mat-error *ngIf="amount.invalid">{{getErrorMessage()}}</mat-error>
+            </div>
+            
+            <button mat-raised-button color="primary" type="submit">Check</button>
+        </form>
+
+
+       
