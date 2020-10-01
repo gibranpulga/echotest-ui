@@ -1,5 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+
+import {AuthInterceptor } from  './auth.interceptor';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,12 +17,21 @@ import { MaterialModule } from './material/material.module';
     UserComponent
   ],
   imports: [
+    ReactiveFormsModule,
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+      {
+          provide: HTTP_INTERCEPTORS,
+          useClass: AuthInterceptor,
+          multi: true,
+      }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

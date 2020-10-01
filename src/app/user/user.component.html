@@ -1,17 +1,31 @@
-        <form >
-            <div class="form-name">
-                <label for="name">Name*</label>
-                <input matInput required>
-                <mat-error *ngIf="name.invalid">{{getErrorMessageName()}}</mat-error>
-            </div>
-            <div class="form-amount">
-                <label for="amount">Amount*</label>
-                <input matInput  required>
-                <mat-error *ngIf="amount.invalid">{{getErrorMessage()}}</mat-error>
-            </div>
-            
-            <button mat-raised-button color="primary" type="submit">Check</button>
-        </form>
+<ng-container *ngIf="input">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+        <label>Name*</label>
+        <input type="text" formControlName="name" matInput required>
+
+        <label>Amount*</label>
+        <input type="number" formControlName="amount" matInput required>
 
 
-       
+        <button mat-raised-button color="primary" [disabled]="!form.valid" type="submit">Submit</button>
+    </form>
+</ng-container>
+
+<ng-container *ngIf="spinner">
+    <mat-spinner></mat-spinner>
+</ng-container>
+
+<ng-container *ngIf="success">
+    <div>
+        <img src="../../assets/images/checked.svg" alt="accepted">
+        <h1>Accepted</h1>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="failure">
+    <div>
+        <img src="../../assets/images/close.svg" alt="declined">
+        <h1>Declined</h1>
+    </div>
+</ng-container>
